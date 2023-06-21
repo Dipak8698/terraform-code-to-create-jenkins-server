@@ -1,12 +1,12 @@
-resource "aws_vpc" "myapp-vpc" {
+resource "aws_vpc" "myapp-2-vpc" {
   cidr_block = var.vpc_cidr_block
   tags = {
     Name = "${var.env_prefix}-vpc"
   }
 }
 
-resource "aws_subnet" "myapp-subnet-1" {
-  vpc_id            = aws_vpc.myapp-vpc.id
+resource "aws_subnet" "myapp-2-subnet-1" {
+  vpc_id            = aws_vpc.myapp-2-vpc.id
   cidr_block        = var.subnet_cidr_block
   availability_zone = var.avail_zone
   tags = {
@@ -14,8 +14,8 @@ resource "aws_subnet" "myapp-subnet-1" {
   }
 }
 
-resource "aws_internet_gateway" "myapp-igw" {
-  vpc_id = aws_vpc.myapp-vpc.id
+resource "aws_internet_gateway" "myapp-2-igw" {
+  vpc_id = aws_vpc.myapp-2-vpc.id
   tags = {
     Name = "${var.env_prefix}-igw"
   }
@@ -33,7 +33,7 @@ resource "aws_default_route_table" "main-rtb" {
 }
 
 resource "aws_default_security_group" "default-sg" {
-  vpc_id = aws_vpc.myapp-vpc.id
+  vpc_id = aws_vpc.myapp-2-vpc.id
   ingress {
     from_port   = 22
     to_port     = 22
